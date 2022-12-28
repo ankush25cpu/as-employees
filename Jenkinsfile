@@ -1,4 +1,4 @@
-	pipeline {
+pipeline {
     agent any
 
     stages {
@@ -19,6 +19,7 @@
             steps {
 		    withSonarQubeEnv('sonarqube-9.8') {
 			    bat 'mvn sonar:sonar'
+		    }
             }
         }
     }
