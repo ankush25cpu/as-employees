@@ -7,9 +7,9 @@
                 echo 'Hello World'
             }
         }
-        stage('Hello2') {
+        stage('Build') {
             steps {
-                echo 'Hello World2'
+               mvn clean install
             }
         }
         stage('Hello3') {
