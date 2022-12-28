@@ -17,8 +17,8 @@ pipeline {
         }
         stage('SonarQuve') {
             steps {
-		    withSonarQubeEnv('sonarqube-9.8') {
-			    bat 'mvn sonar:sonar'
+		    withSonarQubeEnv() {
+			     bat "mvn clean verify sonar:sonar -Dsonar.projectKey=as-employees"
 		    }
             }
         }
