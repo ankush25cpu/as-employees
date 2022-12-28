@@ -10,14 +10,15 @@
         stage('Build') {
             steps {
                script {
-                    bat 'mvn clean install'
+                    bat 'mvn clean package'
                 }
 
             }
         }
-        stage('Hello3') {
+        stage('SonarQuve') {
             steps {
-                echo 'Hello World3 4'
+		    withSonarQubeEnv('sonarqube-9.8') {
+			    bat 'mvn sonar:sonar'
             }
         }
     }
