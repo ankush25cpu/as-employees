@@ -2,11 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World'
-            }
-        }
+
         stage('Build') {
             steps {
                script {
@@ -22,6 +18,12 @@ pipeline {
 		    }
             }
         }
+	stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t ankushrat25/as-employee:1.0 .'
+            }
+        }
+
     }
 }
 	
