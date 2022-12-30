@@ -25,6 +25,9 @@ pipeline {
         }
 	stage('Build Push Image') {
             steps {
+		withCredentials([string(credentialsId: 'SonarQubeSecret', variable: 'GitHubPassword')]) {
+    			bat "docker login -u ankushrat25 -p ${GitHubPassword}"
+		}
                 bat 'docker push ankushrat25/as-employee:1.0'
             }
         }
