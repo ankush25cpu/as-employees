@@ -21,6 +21,7 @@ pipeline {
 	stage('Build Docker Image') {
             steps {
                 bat 'docker build -t ankushrat25/as-employee:1.0 .'
+        	bat 'echo Y | docker image prune'
             }
         }
 	stage('Build Push Image') {
