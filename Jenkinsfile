@@ -1,5 +1,7 @@
 pipeline {
-    agent 'WindowsServer1'
+    agent {
+           label 'WindowsServer1'
+    }
 
     stages {
 
