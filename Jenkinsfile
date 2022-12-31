@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent 'WindowsServer1'
 
     stages {
 
@@ -34,8 +34,6 @@ pipeline {
         }
 	stage('Pull And Run Docker Image') {
             steps {
-                bat "docker stop employee-container || true"
-		bat "docker rm employee-container || true"
 		bat 'docker run -d -p 8080:8080 --name employee-container ankushrat25/as-employee:1.0'
             }
         }
