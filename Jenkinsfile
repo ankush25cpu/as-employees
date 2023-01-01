@@ -6,7 +6,7 @@ pipeline {
         stage('Build') {
             steps {
                script {
-                    bat 'mvn clean package'
+                    sh 'mvn clean package'
                 }
 
             }
@@ -14,27 +14,27 @@ pipeline {
         /* stage('SonarQube') {
             steps {
 		    withSonarQubeEnv('sonarqube-9.8') {
-			     bat "mvn clean verify sonar:sonar -Dsonar.projectKey=as-employees"
+			     sh "mvn clean verify sonar:sonar -Dsonar.projectKey=as-employees"
 		    }
             }
         } */
 	stage('Build Docker Image') {
             steps {
-                bat 'docker build -t ankushrat25/as-employee:1.0 .'
-        	bat 'echo y| docker image prune'
+                sh 'docker build -t ankushrat25/as-employee:1.0 .'
+        	sh 'echo y| docker image prune'
             }
         }
 	stage('Push Docker Image') {
             steps {
 		withCredentials([string(credentialsId: 'GitHubPassword', variable: 'GitHubPassword')]) {
-    			bat "docker login -u ankushrat25 -p ${GitHubPassword}"
+    			sh "docker login -u ankushrat25 -p ${GitHubPassword}"
 		}
-                bat 'docker push ankushrat25/as-employee:1.0'
+                sh 'docker push ankushrat25/as-employee:1.0'
             }
         }
 	stage('Pull And Run Docker Image') {
             steps {
-		bat 'docker run -d -p 8081:8080 --name employee-container ankushrat25/as-employee:1.0'
+		sh 'docker run -d -p 8081:8080 --name employee-container ankushrat25/as-employee:1.0'
             }
         }
 
