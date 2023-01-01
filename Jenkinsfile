@@ -34,7 +34,7 @@ pipeline {
         }
 	stage('Pull And Run Docker Image') {
             steps {
-		bat 'docker run -d -p 8080:8080 --name employee-container ankushrat25/as-employee:1.0'
+		bat 'docker run -d -p 8081:8080 --name employee-container ankushrat25/as-employee:1.0'
             }
         }
 
